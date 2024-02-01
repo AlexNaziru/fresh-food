@@ -6,9 +6,10 @@
         <div class="filters w-full lg:w-1/4">
             <h3 class="mb-3 text-xl uppercase">Cautare</h3>
 
-            <form>
+                {# Get request for the search option, don't forget to add name='' in your input #}
+            <form method="get" action=".">
                 <div class="flex">
-                    <input type="text" class="p-4 bg-gray-100 border-2" placeholder="Cauta..." />
+                    <input type="text" name="query" class="p-4 bg-gray-100 border-2" placeholder="Cauta..." />
                     <button class="p-4 bg-emerald-400 border-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                           <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -19,8 +20,12 @@
 
             <h4 class="mt-6 mb-3 text-xl uppercase">Categorii</h4>
             <ul class="space-y-2">
-                <li><a href="#" class="text-emerald-500">Toate categoriile</a> </li>
-                <li><a href="#" class="text-gray-500">Legume</a> </li>
+                <li><a href="{% url 'shop' %}" class="{% if not active_category %}text-emerald-500
+                             {% else %} text-gray-500{% endif %}">Toate categoriile</a> </li>
+                {% for category in categories %}
+                <li><a href="{% url 'shop' %}?category={{ category.slug }}" class="{% if category.slug == active_category %}text-emerald-500
+                             {% else %} text-gray-500{% endif %}">{{ category.name }}</a> </li>
+                {% endfor %}
             </ul>
         </div>
 
