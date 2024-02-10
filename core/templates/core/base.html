@@ -14,6 +14,13 @@
                 <ul class="flex items-center space-x-4">
                     <li><a href="{% url 'shop' %}">Magazin</a></li>
                     <li><a href="#">Despre</a></li>
+                        {# This is how logout works #}
+                    {% if request.user.is_authenticated %}
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    {% endif %}
                 </ul>
             </div>
 
