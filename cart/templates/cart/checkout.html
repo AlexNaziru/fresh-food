@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% block title %}Casa{% endblock %}
 {%  block content %}
     <div class="max-w-6xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0">
         <div class="products w-full lg:w-3/4">
@@ -8,12 +8,52 @@
             <div class="w-full pr-6">
                 <div class="mb-6 p-6 bg-gray-100 rounded-xl">
                     <h2 class="mb-5 uppercase text-lg">Informatii livrare</h2>
+
+                    <div class="flex space-x-6">
+                        <div class="w-1/2 mb-4">
+                            <label class="inline-block mb-2">Nume</label>
+                            <input type="text" class="w-full p-5 rounded-xl" />
+                        </div>
+
+                        <div class="w-1/2 mb-4">
+                            <label class="inline-block mb-2">Prenume</label>
+                            <input type="text" class="w-full p-5 rounded-xl" />
+                        </div>
+                    </div>
+
+                        <div class=" mb-4">
+                            <label class="inline-block mb-2">Adresa</label>
+                            <input type="text" class="w-full p-5 rounded-xl" />
+                        </div>
+
+                    <div class="flex space-x-6">
+                        <div class="w-1/2 mb-4">
+                            <label class="inline-block mb-2">Oras</label>
+                            <input type="text" class="w-full p-5 rounded-xl" />
+                        </div>
+
+                        <div class="w-1/2 mb-4">
+                            <label class="inline-block mb-2">Judet</label>
+                            <input type="text" class="w-full p-5 rounded-xl" />
+                        </div>
+                    </div>
+
                 </div>
+
                 <div class="mb-6 p-6 bg-gray-100 rounded-xl">
                     <h2 class="mb-5 uppercase text-lg">Informatii de contact</h2>
                 </div>
                 <div class="mb-6 p-6 bg-gray-100 rounded-xl">
                     <h2 class="mb-5 uppercase text-lg">Informatii plata</h2>
+
+                    <div class="mb-4">
+                        <label class="inline-block mb-2">E-mail</label>
+                        <input type="email" class="w-full p-5 rounded-xl" />
+                    </div>
+                    <div class="mb-4">
+                        <label class="inline-block mb-2">Telefon</label>
+                        <input type="tel" class="w-full p-5 rounded-xl" />
+                    </div>
                 </div>
             </div>
         </div>
