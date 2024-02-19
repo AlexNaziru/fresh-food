@@ -2,73 +2,79 @@
 {% block title %}Casa{% endblock %}
 {%  block content %}
     <div class="max-w-6xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0">
-        <div class="products w-full lg:w-3/4">
-            <h1 class="mb-5 text-3xl">Comanda</h1>
+        <form method="post" action="{% url 'start_order' %}">
+                {% csrf_token %}
+            <div class="products w-full lg:w-3/4">
+                <h1 class="mb-5 text-3xl">Comanda</h1>
+                    <div class="w-full pr-6">
+                        <div class="mb-6 p-6 bg-gray-100 rounded-xl">
+                            <h2 class="mb-5 uppercase text-lg">Informatii livrare</h2>
 
-            <div class="w-full pr-6">
-                <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                    <h2 class="mb-5 uppercase text-lg">Informatii livrare</h2>
+                            <div class="flex space-x-6">
+                                <div class="w-1/2 mb-4">
+                                    <label class="inline-block mb-2">Nume</label>
+                                    <input type="text" name="first_name" class="w-full p-5 rounded-xl" value="{{ request.user.first_name }}" />
+                                </div>
 
-                    <div class="flex space-x-6">
-                        <div class="w-1/2 mb-4">
-                            <label class="inline-block mb-2">Nume</label>
-                            <input type="text" class="w-full p-5 rounded-xl" value="{{ request.user.first_name }}" />
+                                <div class="w-1/2 mb-4">
+                                    <label class="inline-block mb-2">Prenume</label>
+                                    <input type="text" name="last_name" class="w-full p-5 rounded-xl" value="{{ request.user.last_name }}" />
+                                </div>
+                            </div>
+
+                                <div class=" mb-4">
+                                    <label class="inline-block mb-2">Adresa</label>
+                                    <input type="text" name="address" class="w-full p-5 rounded-xl" value="{{ request.user.email }}"/>
+                                </div>
+
+                            <div class="flex space-x-6">
+                                <div class="w-1/2 mb-4">
+                                    <label class="inline-block mb-2">Oras</label>
+                                    <input type="text" name="place" class="w-full p-5 rounded-xl" />
+                                </div>
+
+                                <div class="w-1/2 mb-4">
+                                    <label class="inline-block mb-2">Judet</label>
+                                    <input type="text" name="county" class="w-full p-5 rounded-xl" />
+                                </div>
+
+                                <div class="w-1/2 mb-4">
+                                    <label class="inline-block mb-2">Cod Postal</label>
+                                    <input type="text" name="zipcode" class="w-full p-5 rounded-xl" />
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="w-1/2 mb-4">
-                            <label class="inline-block mb-2">Prenume</label>
-                            <input type="text" class="w-full p-5 rounded-xl" value="{{ request.user.last_name }}" />
+                        <div class="mb-6 p-6 bg-gray-100 rounded-xl">
+                            <h2 class="mb-5 uppercase text-lg">Informatii de plata</h2>
+                        </div>
+                        <div class="mb-6 p-6 bg-gray-100 rounded-xl">
+                            <h2 class="mb-5 uppercase text-lg">Informatii de contact</h2>
+
+                            <div class="mb-4">
+                                <label class="inline-block mb-2">E-mail</label>
+                                <input type="email" name="email" class="w-full p-5 rounded-xl" value="{{ request.user.email }}" />
+                            </div>
+                            <div class="mb-4">
+                                <label class="inline-block mb-2">Telefon</label>
+                                <input type="tel" name="phone" class="w-full p-5 rounded-xl" />
+                            </div>
                         </div>
                     </div>
-
-                        <div class=" mb-4">
-                            <label class="inline-block mb-2">Adresa</label>
-                            <input type="text" class="w-full p-5 rounded-xl" value="{{ request.user.email }}"/>
-                        </div>
-
-                    <div class="flex space-x-6">
-                        <div class="w-1/2 mb-4">
-                            <label class="inline-block mb-2">Oras</label>
-                            <input type="text" class="w-full p-5 rounded-xl" />
-                        </div>
-
-                        <div class="w-1/2 mb-4">
-                            <label class="inline-block mb-2">Judet</label>
-                            <input type="text" class="w-full p-5 rounded-xl" />
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                    <h2 class="mb-5 uppercase text-lg">Informatii de contact</h2>
-                </div>
-                <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                    <h2 class="mb-5 uppercase text-lg">Informatii plata</h2>
-
-                    <div class="mb-4">
-                        <label class="inline-block mb-2">E-mail</label>
-                        <input type="email" class="w-full p-5 rounded-xl" />
-                    </div>
-                    <div class="mb-4">
-                        <label class="inline-block mb-2">Telefon</label>
-                        <input type="tel" class="w-full p-5 rounded-xl" />
-                    </div>
-                </div>
             </div>
-        </div>
 
-        <div class="summary w-full lg:w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
-            <h2 class="uppercase text-lg mb-5">
-                Sumar
-            </h2>
-            <div class="mb-6 flex justify-between">
-                <span class="font-semibold">Total</span>
-                <span>{{ cart.get_total_cost }} lei</span>
+            <div class="summary w-full lg:w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
+                <h2 class="uppercase text-lg mb-5">
+                    Sumar
+                </h2>
+                <div class="mb-6 flex justify-between">
+                    <span class="font-semibold">Total</span>
+                    <span>{{ cart.get_total_cost }} lei</span>
+                </div>
+                <button class="inline-block px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-700 text-white">Comanda</button>
             </div>
-            <a href="#" class="inline-block px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-700 text-white">Comanda</a>
-        </div>
-
+        </form>
     </div>
 
 {% endblock %}
