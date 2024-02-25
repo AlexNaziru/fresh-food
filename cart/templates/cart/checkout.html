@@ -44,8 +44,8 @@
 
                     </div>
 
-                    <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                        <h2 class="mb-5 uppercase text-lg">Informatii de plata</h2>
+                    <div class="mb-6 p-6 bg-gray-100 rounded-xl" id="errors">
+
                     </div>
                     <div class="mb-6 p-6 bg-gray-100 rounded-xl">
                         <h2 class="mb-5 uppercase text-lg">Informatii de contact</h2>
@@ -81,6 +81,8 @@
 {#  Stripe config  #}
     <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
     <script>
+        let el = document.getElementById("errors")
+
         function validateForm(data) {
             let errors = []
 
@@ -105,6 +107,16 @@
             if (data.place === '') {
                 errors.push('Place is empty')
             }
+            if (errors.length > 0) {
+                let html = "<ul>";
+                errors.forEach((error) => {
+                    html += "<li>" + error + "</li>";
+                })
+                el.innerHTML = html + "</ul>"
+            } else {
+                el.innerHTML = "";
+            }
+
             return errors
         }
 
