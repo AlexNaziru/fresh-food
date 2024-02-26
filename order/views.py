@@ -34,28 +34,26 @@ def start_order(request):
     # When we loop, we create a session
     stripe.api_key = settings.STRIPE_SECRET_KEY
     session = stripe.checkout.Session.create(
-        payment_method_types = ['card'],
-        line_items = items,
-        mode = 'payment',
-        success_url = 'http://127.0.0.1:8000/cart/success',
-        cancel_url = 'http://127.0.0.1:8000/cart'
+        payment_method_types=['card'],
+        line_items=items,
+        mode='payment',
+        success_url='http://127.0.0.1:8000/cart/success',
+        cancel_url='http://127.0.0.1:8000/cart'
     )
     payment_intent = session.payment_intent  # This is an id we get from stripe when everything is ok
 
-    first_name = data['first_name']
-    last_name = data['last_name']
-    email = data['email']
-    address = data['address']
-    zipcode = data['zipcode']
-    place = data['place']
-    phone = data['phone']
-
-    order = Order.objects.create(user=request.user, first_name=first_name, last_name=last_name, email=email,
-                                 address=address, zipcode=zipcode, place=place, phone=phone)
-    order.payment_intent = payment_intent
-    order.payment_amount = total_price
-    order.paid = True
-    order.save()
+    order = Order.objects.create(
+        user=request.user,
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        email=data['email'],
+        address=data['address'],
+        zipcode=data['zipcode'],
+        place=data['place'],
+        phone=data['phone'],
+        payment_intent=payment_intent,
+        paid=True,
+        paid_amount=total_price)
 
     for item in cart:
         product = item['product']
